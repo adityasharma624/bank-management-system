@@ -20,4 +20,9 @@ public class Current extends Accounts {
             System.out.printf("Transaction successful. Amount withdraw: %.2f. Updated Current Account balance: %.2f.%n", amount, this.balance);
         }
     }
+
+    void getAccountInfo() {
+        System.out.println("Current Account Information");
+        System.out.printf("Account Holder Name: %s%nAccount ID: %d%nBalance: %f%n", this.accountHolderName, this.id, this.balance);
+    }
 }

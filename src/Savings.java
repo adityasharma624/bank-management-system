@@ -31,4 +31,9 @@ public class Savings extends Accounts{
             System.out.printf("Transaction successful. Amount withdraw: %.2f. Updated Savings Account balance: %.2f.%n", amount, this.balance);
         }
     }
+
+    void getAccountInfo() {
+        System.out.println("Savings Account Information:");
+        System.out.printf("Account Holder Name: %s%nAccount ID: %d%nBalance: %f%n",this.accountHolderName, this.id, this.balance);
+    }
 }

@@ -9,4 +9,5 @@ public abstract class Accounts {
 
     abstract void deposit(float amount);
     abstract void withdraw(float amount);
+    abstract void getAccountInfo();
 }
