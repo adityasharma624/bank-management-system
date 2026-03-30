@@ -12,10 +12,15 @@ public abstract class Accounts {
 }
 
 class Savings extends Accounts{
-    float minimumBalance;
+    float minimumBalance = 10000f;
     float balance;
 
-    Savings(int id, String accountHolderName, int minimumBalance, int balance) {
+    Savings(int id, String accountHolderName, float balance) {
+        super(id, accountHolderName);
+        this.balance = balance;
+    }
+
+    Savings(int id, String accountHolderName, float minimumBalance, float balance) {
         super(id, accountHolderName);
         this.minimumBalance = minimumBalance;
         this.balance = balance;
@@ -44,7 +49,7 @@ class Savings extends Accounts{
 class Current extends Accounts {
     float balance;
 
-    Current(int id, String accountHolderName, int balance) {
+    Current(int id, String accountHolderName, float balance) {
         super(id, accountHolderName);
         this.balance = balance;
     }
