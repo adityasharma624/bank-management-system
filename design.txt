@@ -1,9 +1,10 @@
-- "customer" runs the program
-- "customer" logs in "account" using "account number" and "pin" (normal pin, hashed afterwards).
-- "customer" can access "savings account" and "current account"
-    - "savings account" has minimum balance, "current account" does not.
-    - "withdraw" and "deposit" is an option for both.
-    - "transfer" inter and intra
-    - "transaction history"
-- "transaction" class for logging transactions
+first prototype:
+- "account" is created. savings and current accounts are automatically created.
+- "minimum balance" asked for savings (given option of 5k, 10k, 20k, or custom)
+- first select the account from which you want to withdraw and deposit and then, normal operations like "withdraw" and "deposit" allowed.
+- "transfer" the money from one account to another also possible.
 
+future implementation:
+- automated id
+- saving account information (json??)
+- logging transactions and saving them
