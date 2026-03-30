@@ -1,0 +1,9 @@
+- "customer" runs the program
+- "customer" logs in "account" using "account number" and "pin" (normal pin, hashed afterwards).
+- "customer" can access "savings account" and "current account"
+    - "savings account" has minimum balance, "current account" does not.
+    - "withdraw" and "deposit" is an option for both.
+    - "transfer" inter and intra
+    - "transaction history"
+- "transaction" class for logging transactions
+
