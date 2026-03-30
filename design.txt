@@ -1,5 +1,5 @@
 first prototype:
-- "account" is created. savings and current accounts are automatically created.
+- "account" is created. savings and current accounts are created by the choice of the user.
 - "minimum balance" asked for savings (given option of 5k, 10k, 20k, or custom)
 - first select the account from which you want to withdraw and deposit and then, normal operations like "withdraw" and "deposit" allowed.
 - "transfer" the money from one account to another also possible.
