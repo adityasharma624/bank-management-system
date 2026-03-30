@@ -1,4 +1,4 @@
-public class Current extends Accounts {
+class Current extends Accounts {
     float balance;
 
     Current(int id, String accountHolderName, float balance) {

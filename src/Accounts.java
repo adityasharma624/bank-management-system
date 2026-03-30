@@ -1,4 +1,4 @@
-public abstract class Accounts {
+abstract class Accounts {
     int id;
     String accountHolderName;
 //    int pin;

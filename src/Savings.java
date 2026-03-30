@@ -1,4 +1,4 @@
-public class Savings extends Accounts{
+class Savings extends Accounts{
     float minimumBalance = 10000f;
     float balance;
 
