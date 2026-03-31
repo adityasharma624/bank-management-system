@@ -17,6 +17,7 @@ class Current extends Accounts {
             System.out.print("Transaction declined: insufficient available balance to process the requested withdrawal.");
         }
         else {
+            this.balance = remaining;
             System.out.printf("Transaction successful. Amount withdraw: %.2f. Updated Current Account balance: %.2f.%n", amount, this.balance);
         }
     }
