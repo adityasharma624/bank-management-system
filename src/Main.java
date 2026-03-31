@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
 import java.util.Scanner;
 
 class Main {
@@ -52,13 +53,15 @@ class Main {
         } while (choice != 3);
     }
 
-    static void loginMenu(int uid) {
+    static void loginMenu(int uid) throws IOException, ClassNotFoundException {
+        HashMap<String, String> userinfo = recordHandler.getUserInfo(uid);
         int choice = 0;
         do {
-            System.out.println("Welcome User");
-            System.out.println("1. Login");
-            System.out.println("2. Register");
-            System.out.println("3. Exit");
+            System.out.printf("Welcome %s!%n", userinfo.get("username"));
+            System.out.println("1. Withdraw");
+            System.out.println("2. Deposit");
+            System.out.println("3. Account Information");
+            System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
 
             while (!input.hasNextInt()) {
@@ -83,11 +86,12 @@ class Main {
                 case (3):
                     System.out.println("Shutting down the system...");
                     break;
+
                 default:
                     System.out.println("This option does not exist!");
                     break;
             }
-        } while (choice != 3);
+        } while (choice != 4);
     }
 
     static int authenticationCaller() throws IOException, ClassNotFoundException {

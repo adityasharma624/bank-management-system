@@ -4,13 +4,15 @@ import java.util.HashMap;
 class RecordHandling {
     static final String FILEPATH = "../records/record.txt";
 
+
     HashMap<Integer, HashMap<String, String>> getRecord() throws IOException, ClassNotFoundException {
         ObjectInputStream ois = getInputStream();
         return (HashMap<Integer, HashMap<String, String>>) ois.readObject();
     }
 
-    HashMap<Integer, HashMap<String, String>> getUserInfo(int uid) {
-
+    HashMap<String, String> getUserInfo(int uid) throws IOException, ClassNotFoundException {
+        HashMap<Integer, HashMap<String, String>> record = getRecord();
+        return record.get(uid);
     }
 
     int authentication(int uid, String password) throws IOException, ClassNotFoundException {

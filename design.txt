@@ -8,3 +8,7 @@ future implementation:
 - automated id
 - saving account information (json??)
 - logging transactions and saving them
+
+
+record hashmap
+{uid:User Object}
