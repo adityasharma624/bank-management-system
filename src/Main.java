@@ -14,7 +14,7 @@ class Main {
         System.out.println(new IOException().getMessage());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         int choice = 0;
         do {
             System.out.println("Welcome to Bank Management System");
@@ -34,7 +34,10 @@ class Main {
             switch (choice) {
                 case (1):
                     System.out.println("Logging in...");
+                    int user = authenticationCaller();
+                    if (user != -1) {
 
+                    }
                     break;
                 case (2):
                     System.out.println("Registering...");
@@ -49,12 +52,64 @@ class Main {
         } while (choice != 3);
     }
 
-    static int authentication(ObjectInputStream ois) {
-        int uid;
-        String password;
-        System.out.print("Enter your user ID: ");
-        uid = input.nextInt();
+    static void loginMenu(int uid) {
+        int choice = 0;
+        do {
+            System.out.println("Welcome User");
+            System.out.println("1. Login");
+            System.out.println("2. Register");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
 
-        return 1;
+            while (!input.hasNextInt()) {
+                System.out.print("Try a number: ");
+                input.next();       // clears bad input
+            }
+
+            choice = input.nextInt();
+
+            System.out.println("Processing option " + choice + "...");
+            switch (choice) {
+                case (1):
+                    System.out.println("Logging in...");
+                    int user = authenticationCaller();
+                    if (user != -1) {
+
+                    }
+                    break;
+                case (2):
+                    System.out.println("Registering...");
+                    break;
+                case (3):
+                    System.out.println("Shutting down the system...");
+                    break;
+                default:
+                    System.out.println("This option does not exist!");
+                    break;
+            }
+        } while (choice != 3);
+    }
+
+    static int authenticationCaller() throws IOException, ClassNotFoundException {
+        System.out.print("Enter your UID: ");
+
+        while (!input.hasNextInt()) {
+            System.out.print("The UID is a number: ");
+            input.next();
+        }
+        int uid = input.nextInt();
+        System.out.print("Enter your password: ");
+        String password = input.nextLine();
+
+        int status = recordHandler.authentication(uid, password);
+        if (status == 0) {
+            System.out.println("Wrong Password");
+            return -1;
+        } else if (status == 1) {
+            System.out.println("User Authenticated Successfully");
+            return uid;
+        }
+        System.out.println("User Not Found");
+        return -1;
     }
 }
