@@ -36,8 +36,16 @@ class Main {
                 case (1):
                     System.out.println("Logging in...");
                     int user = authenticationCaller();
-                    if (user != -1) {
-
+                    switch (user) {
+                        case (-1):
+                            System.out.println("User Not Found");
+                            break;
+                        case (0):
+                            System.out.println("Wrong Password");
+                            break;
+                        default:
+                            loginMenu(user);
+                            break;
                     }
                     break;
                 case (2):
@@ -53,45 +61,11 @@ class Main {
         } while (choice != 3);
     }
 
-    static void loginMenu(int uid) throws IOException, ClassNotFoundException {
-        HashMap<String, String> userinfo = recordHandler.getUserInfo(uid);
-        int choice = 0;
-        do {
-            System.out.printf("Welcome %s!%n", userinfo.get("username"));
-            System.out.println("1. Withdraw");
-            System.out.println("2. Deposit");
-            System.out.println("3. Account Information");
-            System.out.println("4. Exit");
-            System.out.print("Enter your choice: ");
+    static void loginMenu(int user) throws IOException, ClassNotFoundException {
+        User customer = recordHandler.getUserInfo(user);
+        String username = customer.getName();
+        System.out.printf("Welcome %s!%n",username);
 
-            while (!input.hasNextInt()) {
-                System.out.print("Try a number: ");
-                input.next();       // clears bad input
-            }
-
-            choice = input.nextInt();
-
-            System.out.println("Processing option " + choice + "...");
-            switch (choice) {
-                case (1):
-                    System.out.println("Logging in...");
-                    int user = authenticationCaller();
-                    if (user != -1) {
-
-                    }
-                    break;
-                case (2):
-                    System.out.println("Registering...");
-                    break;
-                case (3):
-                    System.out.println("Shutting down the system...");
-                    break;
-
-                default:
-                    System.out.println("This option does not exist!");
-                    break;
-            }
-        } while (choice != 4);
     }
 
     static int authenticationCaller() throws IOException, ClassNotFoundException {
