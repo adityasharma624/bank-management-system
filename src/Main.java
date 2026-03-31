@@ -1,31 +1,36 @@
 import java.util.Scanner;
 
+Scanner input = new Scanner(System.in);
 void main() {
-    Scanner sc = new Scanner(System.in);
-    System.out.println("Welcome to Bank Management System");
-    System.out.println("Would you like to create a bank account?%n" +
-            "Select one of the options below:%n" +
-            "1. Savings Account (Required to have a Minimum Account Balance)%n" +
-            "2. Current Account%n" +
-            "3. Both: ");
-    int choice = sc.nextInt();
+    int choice = 0;
+    do {
+        System.out.println("Welcome to Bank Management System");
+        System.out.println("1. Login");
+        System.out.println("2. Register");
+        System.out.println("3. Exit");
+        System.out.print("Enter your choice: ");
 
-    System.out.println("Input Information Regarding the Creation of New Account");
-    System.out.print("Name: ");
-    String name = sc.next();
-    System.out.print("%nID: ");
-    int id = sc.nextInt();
-    System.out.print("%nInitial Balance: ");
-    float balance = sc.nextFloat();
-    switch(choice) {
-        case (1):
-            System.out.print("%nSet your minimum account balance (Enter if you want the default 10,000 as minimum account balance): ");
-            if (sc.hasNext()) {
-                float mab = sc.nextFloat();
-            }
-            else {
-                Savings savings = new Savings(id, name, balance);
-            }
-    }
+        while (!input.hasNextInt()) {
+            System.out.print("Try a number: ");
+            input.next();       // clears bad input
+        }
 
+        choice = input.nextInt();
+
+        System.out.println("Processing option " + choice + "...");
+        switch (choice) {
+            case (1):
+                System.out.println("Logging in...");
+                break;
+            case (2):
+                System.out.println("Registering...");
+                break;
+            case (3):
+                System.out.println("Shutting down the system...");
+                break;
+            default:
+                System.out.println("This option does not exist!");
+                break;
+        }
+    } while (choice != 3);
 }
