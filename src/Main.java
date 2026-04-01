@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
 import java.util.Scanner;
 
 class Main {
@@ -87,6 +86,9 @@ class Main {
                     break;
                 case(3):
                     System.out.println("Transferring...");
+                    boolean status = transferProtocol(uid);
+                    if (status) System.out.println("Transfer Successful");
+                    else System.out.println("Transfer Cancelled");
                     break;
                 case(4):
                     System.out.println("Getting...");
@@ -100,6 +102,43 @@ class Main {
             }
         } while (choice != 5);
 
+    }
+
+    static boolean depositProtocol(int uid) {
+        System.out.print("Enter the amount: ");
+        float amount = input.nextFloat();
+
+    }
+
+    static boolean transferProtocol(int uid) throws IOException, ClassNotFoundException {
+        System.out.println("Select an option: ");
+        System.out.println("1. Savings to Current");
+        System.out.println("2. Current to Savings");
+        System.out.println("3. Exit");
+        int choice = 0;
+        while (!input.hasNextInt()) {
+            System.out.print("Try a number: ");
+            input.next();       // clears bad input
+        }
+
+        choice = input.nextInt();
+
+        System.out.print("Enter the amount: ");
+        float amount = input.nextFloat();
+        boolean status = false;
+        User customer = recordHandler.getUserInfo(uid);
+        switch(choice) {
+            case (1):
+                status = customer.internalTransfer( customer.saving, customer.current, amount);
+                break;
+            case (2):
+                status = customer.internalTransfer(customer.current, customer.saving, amount);
+                break;
+            case (3):
+                System.out.println("Exiting the transfer protocol!");
+                break;
+        }
+        return status;
     }
 
     static int authenticationCaller() throws IOException, ClassNotFoundException {
