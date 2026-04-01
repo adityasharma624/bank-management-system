@@ -35,17 +35,12 @@ class Main {
             switch (choice) {
                 case (1):
                     System.out.println("Logging in...");
-                    int user = authenticationCaller();
-                    switch (user) {
-                        case (-1):
-                            System.out.println("User Not Found");
-                            break;
-                        case (0):
-                            System.out.println("Wrong Password");
-                            break;
-                        default:
-                            loginMenu(user);
-                            break;
+                    int uid = authenticationCaller();        // gives uid if username and pin correct, else 0 for wrong credentials
+                    if (uid == 0) {
+                        System.out.println("Incorrect Credentials");
+                    }
+                    else {
+                        loginMenu(uid);
                     }
                     break;
                 case (2):
@@ -61,10 +56,49 @@ class Main {
         } while (choice != 3);
     }
 
-    static void loginMenu(int user) throws IOException, ClassNotFoundException {
-        User customer = recordHandler.getUserInfo(user);
-        String username = customer.getName();
-        System.out.printf("Welcome %s!%n",username);
+    static void loginMenu(int uid) throws IOException, ClassNotFoundException {
+        User customer = recordHandler.getUserInfo(uid);
+        System.out.printf("Welcome %s!%n",customer.getName());
+        int choice = 0;
+        do {
+            System.out.println("Welcome to Bank Management System");
+            System.out.println("1. Withdraw");
+            System.out.println("2. Deposit");
+            System.out.println("3. Transfer (Internal)");
+            System.out.println("4. Get Account Information");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+
+
+            while (!input.hasNextInt()) {
+                System.out.print("Try a number: ");
+                input.next();       // clears bad input
+            }
+
+            choice = input.nextInt();
+
+            System.out.println("Processing Choice " + choice + "...");
+            switch(choice) {
+                case(1):
+                    System.out.println("Withdrawing...");
+                    break;
+                case(2):
+                    System.out.println("Depositing...");
+                    break;
+                case(3):
+                    System.out.println("Transferring...");
+                    break;
+                case(4):
+                    System.out.println("Getting...");
+                    break;
+                case(5):
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("This option does not exist!");
+                    break;
+            }
+        } while (choice != 5);
 
     }
 
@@ -76,18 +110,15 @@ class Main {
             input.next();
         }
         int uid = input.nextInt();
-        System.out.print("Enter your password: ");
-        String password = input.nextLine();
+        System.out.print("Enter your PIN: ");
+        int pin = input.nextInt();
 
-        int status = recordHandler.authentication(uid, password);
-        if (status == 0) {
-            System.out.println("Wrong Password");
-            return -1;
-        } else if (status == 1) {
+        int status = recordHandler.authentication(uid, pin);
+        if (status == 1) {
             System.out.println("User Authenticated Successfully");
             return uid;
+        } else {
+            return 0;
         }
-        System.out.println("User Not Found");
-        return -1;
     }
 }

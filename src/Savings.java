@@ -13,23 +13,19 @@ class Savings extends Accounts{
         this.balance = balance;
     }
 
-    void deposit(float amount) {
+    boolean deposit(float amount) {
         this.balance += amount;
         System.out.printf("Transaction successful. Amount deposited: %.2f. Updated Savings Account balance: %.2f.%n", amount, this.balance);
+        return true;
     }
 
-    void withdraw(float amount) {
+    boolean withdraw(float amount) {
         float remaining = this.balance - amount;
         if (remaining < minimumBalance) {
-            System.out.printf(
-                    "Transaction declined: the requested withdrawal would result in the account falling below the required minimum balance of %.2f.%n",
-                    this.minimumBalance
-            );
+            return false;
         }
-        else {
-            this.balance = remaining;
-            System.out.printf("Transaction successful. Amount withdraw: %.2f. Updated Savings Account balance: %.2f.%n", amount, this.balance);
-        }
+        this.balance = remaining;
+        return true;
     }
 
     void getAccountInfo() {

@@ -1,47 +1,23 @@
-import java.util.HashMap;
+import java.util.List;
 
 class User {
     String name;
-    private String password;
-    boolean hasCurrent;
-    boolean hasSavings;
-    int current;
-    int savings;
+    private int pin;
+    Savings saving;
+    Current current;
 
-    public User(String name, String password, boolean hasCurrent, boolean hasSavings, int current, int savings) {
+    public User(String name, int pin) {
         this.name = name;
-        this.password = password;
-        this.hasCurrent = hasCurrent;
-        this.hasSavings = hasSavings;
-        this.current = current;
-        this.savings = savings;
-    }
-
-    boolean checkPassword(String password) {
-        return this.password.equals(password);
+        this.pin = pin;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getPassword() {
-        return password;
+    public int getPin() {
+        return pin;
     }
 
-    public boolean isHasCurrent() {
-        return hasCurrent;
-    }
-
-    public boolean isHasSavings() {
-        return hasSavings;
-    }
-
-    public int getCurrent() {
-        return current;
-    }
-
-    public int getSavings() {
-        return savings;
-    }
+    public List<Accounts> getAccountlist() { return accountlist; }
 }

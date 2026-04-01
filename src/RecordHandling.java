@@ -19,7 +19,7 @@ class RecordHandling {
     }
 
     static void initializeRecords() throws IOException {
-        User admin = new User("admin", null, false, false, 0, 0);
+        User admin = new User("admin", -1);
         ObjectOutputStream oos = new RecordHandling().getOutputStream();
         HashMap<Integer, User> map = new HashMap<>();
         map.put(10000, admin);
@@ -37,24 +37,19 @@ class RecordHandling {
         return records.get(uid);
     }
 
-    int authentication(int uid, String password) throws IOException, ClassNotFoundException {
+    int authentication(int uid, int pin) throws IOException, ClassNotFoundException {
         /*
-           -1: user not found
-            0: password wrong
+            0: wrong credentials
             1: user authenticated
          */
         HashMap<Integer, User> records = getRecords();
-        if (records.containsKey(uid)) {
-            if (records.get(uid).getPassword().equals(password)) {
-                return 1;
-            }
-            else {
-                return 0;
-            }
+        if (records.containsKey(uid) && records.get(uid).getPin() == pin) {
+            return 1;
         }
-        return -1;
+        return 0;
     }
 
+    // returns object input stream
     ObjectInputStream getInputStream() throws IOException {
         try (FileInputStream fileInputStream = new FileInputStream(FILEPATH)) {}
         catch (IOException e)
@@ -68,6 +63,7 @@ class RecordHandling {
         return objectInputStream;
     }
 
+    // returns object output stream
     ObjectOutputStream getOutputStream() throws IOException {
         try (FileOutputStream fileOutputStream = new FileOutputStream(FILEPATH)){}
         catch (IOException e)

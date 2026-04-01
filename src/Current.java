@@ -6,20 +6,18 @@ class Current extends Accounts {
         this.balance = balance;
     }
 
-    void deposit(float amount) {
+    boolean deposit(float amount) {
         this.balance += amount;
-        System.out.printf("Transaction successful. Amount deposited: %.2f. Updated Current Account balance: %.2f.%n", amount, this.balance);
+    return true;
     }
 
-    void withdraw(float amount) {
+    boolean withdraw(float amount) {
         float remaining = this.balance - amount;
         if (remaining < 0) {
-            System.out.print("Transaction declined: insufficient available balance to process the requested withdrawal.");
+            return false;
         }
-        else {
-            this.balance = remaining;
-            System.out.printf("Transaction successful. Amount withdraw: %.2f. Updated Current Account balance: %.2f.%n", amount, this.balance);
-        }
+        this.balance = remaining;
+        return true;
     }
 
     void getAccountInfo() {
