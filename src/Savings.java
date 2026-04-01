@@ -14,8 +14,8 @@ class Savings extends Accounts{
     }
 
     boolean deposit(float amount) {
+        if (amount <= 0) return false;
         this.balance += amount;
-        System.out.printf("Transaction successful. Amount deposited: %.2f. Updated Savings Account balance: %.2f.%n", amount, this.balance);
         return true;
     }
 

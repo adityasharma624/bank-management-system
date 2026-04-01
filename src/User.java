@@ -19,5 +19,12 @@ class User {
         return pin;
     }
 
-    public List<Accounts> getAccountlist() { return accountlist; }
+    public boolean internalTransfer(Accounts from, Accounts to, float amount) {
+        if (from.withdraw(amount)) {
+            to.deposit(amount);
+            return true;
+        }
+        return false;
+    }
+
 }
