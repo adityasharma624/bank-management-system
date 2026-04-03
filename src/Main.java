@@ -4,7 +4,7 @@ Manager manager = new Manager();
 Scanner input = new Scanner(System.in);
 
 void main() {
-    int choice = 0;
+    int choice;
     do {
         System.out.println("Bank Management System");
         System.out.println("1. Login");
@@ -22,8 +22,8 @@ void main() {
         switch (choice) {
             case (1):
                 System.out.print("Enter your UID: ");
-                int loginid = input.nextInt();
-                if (login(loginid) == -1) {
+                int loginId = input.nextInt();
+                if (login(loginId) == -1) {
                     System.out.println("UID Not Found!");
                 }
                 break;
@@ -45,7 +45,7 @@ void main() {
 }
 
 int login(int uid) {
-    int choice = 0;
+    int choice;
     if (manager.exists(uid)) {
         User user = manager.getUser(uid);
         System.out.print("Enter your PIN: ");
