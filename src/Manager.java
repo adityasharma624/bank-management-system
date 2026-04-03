@@ -7,6 +7,10 @@ class Manager {
         records.put(uid, customer);
     }
 
+    User getUser(int uid) {
+        return records.get(uid);
+    }
+
     boolean isUnique(int uid) {
         if (records.containsKey(uid))
             return false;

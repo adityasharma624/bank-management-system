@@ -31,4 +31,12 @@ class User {
         if (current != null) current.getInfo();
         if (savings != null) savings.getInfo();
     }
+
+    Accounts getSavings() {
+        return savings;
+    }
+
+    Accounts getCurrent() {
+        return current;
+    }
 }
