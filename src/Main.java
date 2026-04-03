@@ -1,163 +1,51 @@
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
-class Main {
-    static Scanner input = new Scanner(System.in);
-    static RecordHandling recordHandler = new RecordHandling();
+Manager manager = new Manager();
+Scanner input = new Scanner(System.in);
 
-    ObjectInputStream ois = recordHandler.getInputStream();
-    ObjectOutputStream oos = recordHandler.getOutputStream();
-
-    Main() throws IOException {
-        System.out.println(new IOException().getMessage());
-    }
-
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        int choice = 0;
-        do {
-            System.out.println("Welcome to Bank Management System");
-            System.out.println("1. Login");
-            System.out.println("2. Register");
-            System.out.println("3. Exit");
-            System.out.print("Enter your choice: ");
-
-            while (!input.hasNextInt()) {
-                System.out.print("Try a number: ");
-                input.next();       // clears bad input
-            }
-
-            choice = input.nextInt();
-
-            System.out.println("Processing option " + choice + "...");
-            switch (choice) {
-                case (1):
-                    System.out.println("Logging in...");
-                    int uid = authenticationCaller();        // gives uid if username and pin correct, else 0 for wrong credentials
-                    if (uid == 0) {
-                        System.out.println("Incorrect Credentials");
-                    }
-                    else {
-                        loginMenu(uid);
-                    }
-                    break;
-                case (2):
-                    System.out.println("Registering...");
-                    break;
-                case (3):
-                    System.out.println("Shutting down the system...");
-                    break;
-                default:
-                    System.out.println("This option does not exist!");
-                    break;
-            }
-        } while (choice != 3);
-    }
-
-    static void loginMenu(int uid) throws IOException, ClassNotFoundException {
-        User customer = recordHandler.getUserInfo(uid);
-        System.out.printf("Welcome %s!%n",customer.getName());
-        int choice = 0;
-        do {
-            System.out.println("Welcome to Bank Management System");
-            System.out.println("1. Withdraw");
-            System.out.println("2. Deposit");
-            System.out.println("3. Transfer (Internal)");
-            System.out.println("4. Get Account Information");
-            System.out.println("5. Exit");
-            System.out.print("Enter your choice: ");
-
-
-            while (!input.hasNextInt()) {
-                System.out.print("Try a number: ");
-                input.next();       // clears bad input
-            }
-
-            choice = input.nextInt();
-
-            System.out.println("Processing Choice " + choice + "...");
-            switch(choice) {
-                case(1):
-                    System.out.println("Withdrawing...");
-                    break;
-                case(2):
-                    System.out.println("Depositing...");
-                    break;
-                case(3):
-                    System.out.println("Transferring...");
-                    boolean status = transferProtocol(uid);
-                    if (status) System.out.println("Transfer Successful");
-                    else System.out.println("Transfer Cancelled");
-                    break;
-                case(4):
-                    System.out.println("Getting...");
-                    break;
-                case(5):
-                    System.out.println("Exiting...");
-                    break;
-                default:
-                    System.out.println("This option does not exist!");
-                    break;
-            }
-        } while (choice != 5);
-
-    }
-
-    static boolean depositProtocol(int uid) {
-        System.out.print("Enter the amount: ");
-        float amount = input.nextFloat();
-
-    }
-
-    static boolean transferProtocol(int uid) throws IOException, ClassNotFoundException {
-        System.out.println("Select an option: ");
-        System.out.println("1. Savings to Current");
-        System.out.println("2. Current to Savings");
+void main() {
+    int choice = 0;
+    do {
+        System.out.println("Bank Management System");
+        System.out.println("1. Login");
+        System.out.println("2. Register");
         System.out.println("3. Exit");
-        int choice = 0;
+        System.out.print("Select a choice: ");
+
         while (!input.hasNextInt()) {
-            System.out.print("Try a number: ");
-            input.next();       // clears bad input
+            System.out.println("Try a number: ");
+            input.next();
         }
 
         choice = input.nextInt();
-
-        System.out.print("Enter the amount: ");
-        float amount = input.nextFloat();
-        boolean status = false;
-        User customer = recordHandler.getUserInfo(uid);
-        switch(choice) {
+        input.next();
+        switch (choice) {
             case (1):
-                status = customer.internalTransfer( customer.saving, customer.current, amount);
                 break;
             case (2):
-                status = customer.internalTransfer(customer.current, customer.saving, amount);
+                System.out.print("Enter your UID: ");
+                int uid = input.nextInt();
+                if (register(uid) == 0) System.out.println("Account created!");
+                else System.out.println("UID already in use");
                 break;
             case (3):
-                System.out.println("Exiting the transfer protocol!");
+                System.out.println("Exiting");
                 break;
         }
-        return status;
-    }
 
-    static int authenticationCaller() throws IOException, ClassNotFoundException {
-        System.out.print("Enter your UID: ");
+    } while (choice != 3);
+}
 
-        while (!input.hasNextInt()) {
-            System.out.print("The UID is a number: ");
-            input.next();
-        }
-        int uid = input.nextInt();
-        System.out.print("Enter your PIN: ");
+int register(int uid) {
+    if (manager.isUnique(uid)) {
+        System.out.print("Enter your name: ");
+        String name = input.next();
+        System.out.print("Enter your pin: ");
         int pin = input.nextInt();
-
-        int status = recordHandler.authentication(uid, pin);
-        if (status == 1) {
-            System.out.println("User Authenticated Successfully");
-            return uid;
-        } else {
-            return 0;
-        }
+        System.out.println("Creating both savings and current accounts for you.");
+        User customer = new User(name, pin, true, true);
+        manager.put(uid, customer);
+        return 0;
     }
+    return -1;
 }

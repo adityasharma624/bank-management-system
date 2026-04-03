@@ -1,35 +1,32 @@
 class Savings extends Accounts{
-    float minimumBalance = 10000f;
-    float balance;
+    float interest;
 
-    Savings(int id, String accountHolderName, float balance) {
-        super(id, accountHolderName);
-        this.balance = balance;
+    Savings(double balance, double minimumAccountBalance, float interest) {
+        super(balance, minimumAccountBalance);
+        this.interest = interest;
     }
 
-    Savings(int id, String accountHolderName, float minimumBalance, float balance) {
-        super(id, accountHolderName);
-        this.minimumBalance = minimumBalance;
-        this.balance = balance;
+    @Override
+    int deposit(double amount) {
+        if (amount <= 0) return -1;
+        this.balance = amount;
+        return 0;
     }
 
-    boolean deposit(float amount) {
-        if (amount <= 0) return false;
-        this.balance += amount;
-        return true;
-    }
-
-    boolean withdraw(float amount) {
-        float remaining = this.balance - amount;
-        if (remaining < minimumBalance) {
-            return false;
+    @Override
+    int withdraw(double amount) {
+        if (this.balance - amount >= this.minimumAccountBalance) {
+            this.balance -= amount;
+            return 0;
         }
-        this.balance = remaining;
-        return true;
+        return -1;
     }
 
-    void getAccountInfo() {
-        System.out.println("Savings Account Information:");
-        System.out.printf("Account Holder Name: %s%nAccount ID: %d%nBalance: %f%n",this.accountHolderName, this.id, this.balance);
+    @Override
+    void getInfo() {
+        System.out.println("Type of Account: Current");
+        System.out.printf("Current Balance: %f%n", this.balance);
+        System.out.printf("Minimum Account Balance: %f%n", this.minimumAccountBalance);
+        System.out.printf("Interest: %f/%%n", this.interest);
     }
 }

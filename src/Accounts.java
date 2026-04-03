@@ -1,13 +1,13 @@
 abstract class Accounts {
-    int id;
-    String accountHolderName;
-    int pin;
-    Accounts(int id, String accountHolderName) {
-        this.id = id;
-        this.accountHolderName = accountHolderName;
+    double balance;
+    double minimumAccountBalance;
+
+    Accounts(double balance, double minimumAccountBalance) {
+        this.balance = balance;
+        this.minimumAccountBalance = minimumAccountBalance;
     }
 
-    abstract boolean deposit(float amount);
-    abstract boolean withdraw(float amount);
-    abstract void getAccountInfo();
+    abstract int deposit(double amount);
+    abstract int withdraw(double amount);
+    abstract void getInfo();
 }

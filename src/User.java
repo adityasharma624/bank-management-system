@@ -1,30 +1,24 @@
-import java.util.List;
-
 class User {
     String name;
     private int pin;
-    Savings saving;
     Current current;
+    Savings savings;
 
-    public User(String name, int pin) {
+    User(String name, int pin, boolean wantCurrent, boolean wantSavings) {
         this.name = name;
         this.pin = pin;
+        if (wantCurrent) current = new Current(0, 0, 10000);
+        if (wantSavings) savings = new Savings(0, 25000, 5);
     }
 
-    public String getName() {
-        return name;
+    boolean checkPin(int pin) {
+        return (this.pin == pin);
     }
 
-    public int getPin() {
-        return pin;
+    void getInfo() {
+        System.out.printf("Name: %s%n", this.name);
+        System.out.println("Account Information: ");
+        if (current != null) current.getInfo();
+        if (savings != null) savings.getInfo();
     }
-
-    public boolean internalTransfer(Accounts from, Accounts to, float amount) {
-        if (from.withdraw(amount)) {
-            to.deposit(amount);
-            return true;
-        }
-        return false;
-    }
-
 }
