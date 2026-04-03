@@ -1,9 +1,7 @@
 class Current extends Accounts{
-    double overdraftLimit;
 
-    Current(double balance, double minimumAccountBalance, double overdraftLimit) {
+    Current(double balance, double minimumAccountBalance) {
         super(balance, minimumAccountBalance);
-        this.overdraftLimit = overdraftLimit;
     }
 
     @Override
@@ -15,7 +13,7 @@ class Current extends Accounts{
 
     @Override
     boolean withdraw(double amount) {
-        if (this.balance - amount >= this.minimumAccountBalance && this.balance - amount <= overdraftLimit) {
+        if (this.balance - amount >= this.minimumAccountBalance) {
             this.balance -= amount;
             return true;
         }
@@ -26,6 +24,5 @@ class Current extends Accounts{
     void getInfo() {
         System.out.println("Type of Account: Current");
         System.out.printf("Current Balance: %f%n", this.balance);
-        System.out.printf("Overdraft Limit: %f%n", this.overdraftLimit);
     }
 }

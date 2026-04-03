@@ -48,6 +48,13 @@ int login(int uid) {
     if (manager.isUnique(uid)) {
         int choice = 0;
         User user = manager.getUser(uid);
+        System.out.print("Enter your PIN: ");
+        int pin = input.nextInt();
+        input.nextLine();
+        if (!user.checkPin(pin)) {
+            System.out.println("Wrong PIN!");
+            return -1;
+        }
         do {
             System.out.printf("Welcome! %s%n",user.name);
             System.out.println("1. Deposit");

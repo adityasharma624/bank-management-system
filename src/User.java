@@ -7,7 +7,7 @@ class User {
     User(String name, int pin, boolean wantCurrent, boolean wantSavings) {
         this.name = name;
         this.pin = pin;
-        if (wantCurrent) current = new Current(0, 0, 10000);
+        if (wantCurrent) current = new Current(0, 0);
         if (wantSavings) savings = new Savings(0, 25000, 5);
     }
 
