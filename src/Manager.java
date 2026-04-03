@@ -13,7 +13,7 @@ class Manager {
 
     boolean isUnique(int uid) {
         if (records.containsKey(uid))
-            return false;
-        return true;
+            return true;
+        return false;
     }
 }

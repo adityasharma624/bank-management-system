@@ -77,7 +77,7 @@ int login(int uid) {
                     Accounts withdrawAccount = getAccount(user);
                     System.out.print("Deposit Amount: ");
                     double withdrawal = input.nextDouble();
-                    if (withdrawAccount.deposit(withdrawal)) System.out.println("Success!");
+                    if (withdrawAccount.withdraw(withdrawal)) System.out.println("Success!");
                     else System.out.println("Failure!");
                     break;
                 case (3):

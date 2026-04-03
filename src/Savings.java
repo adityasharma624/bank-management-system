@@ -24,7 +24,7 @@ class Savings extends Accounts{
 
     @Override
     void getInfo() {
-        System.out.println("Type of Account: Current");
+        System.out.println("Type of Account: Savings");
         System.out.printf("Current Balance: %f%n", this.balance);
         System.out.printf("Minimum Account Balance: %f%n", this.minimumAccountBalance);
         System.out.printf("Interest: %f/%%n", this.interest);
