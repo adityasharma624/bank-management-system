@@ -7,19 +7,19 @@ class Current extends Accounts{
     }
 
     @Override
-    int deposit(double amount) {
-        if (amount <= 0) return -1;
+    boolean deposit(double amount) {
+        if (amount <= 0) return false;
         this.balance = amount;
-        return 0;
+        return true;
     }
 
     @Override
-    int withdraw(double amount) {
+    boolean withdraw(double amount) {
         if (this.balance - amount >= this.minimumAccountBalance && this.balance - amount <= overdraftLimit) {
             this.balance -= amount;
-            return 0;
+            return true;
         }
-        return -1;
+        return false;
     }
 
     @Override

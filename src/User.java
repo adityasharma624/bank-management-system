@@ -15,6 +15,13 @@ class User {
         return (this.pin == pin);
     }
 
+    boolean internalTransfer(Accounts from, Accounts to, double amount) {
+        if (from.withdraw(amount) && to.deposit(amount)) {
+            return true;
+        }
+        return false;
+    }
+
     void getInfo() {
         System.out.printf("Name: %s%n", this.name);
         System.out.println("Account Information: ");
