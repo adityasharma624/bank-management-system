@@ -16,8 +16,11 @@ class User {
     }
 
     boolean internalTransfer(Accounts from, Accounts to, double amount) {
-        if (from.withdraw(amount) && to.deposit(amount)) {
-            return true;
+        if (from.withdraw(amount)) {
+            if (to.deposit(amount)) {
+                return true;
+            }
+            from.deposit(amount);
         }
         return false;
     }
