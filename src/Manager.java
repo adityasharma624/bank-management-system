@@ -11,7 +11,7 @@ class Manager {
         return records.get(uid);
     }
 
-    boolean isUnique(int uid) {
+    boolean exists(int uid) {
         if (records.containsKey(uid))
             return true;
         return false;

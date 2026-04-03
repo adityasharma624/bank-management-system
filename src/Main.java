@@ -45,7 +45,7 @@ void main() {
 }
 
 int login(int uid) {
-    if (manager.isUnique(uid)) {
+    if (manager.exists(uid)) {
         int choice = 0;
         User user = manager.getUser(uid);
         System.out.print("Enter your PIN: ");
@@ -164,7 +164,7 @@ Accounts getAccount(User user) {
 }
 
 int register(int uid) {
-    if (manager.isUnique(uid)) {
+    if (manager.exists(uid)) {
         System.out.print("Enter your name: ");
         String name = input.next();
         System.out.print("Enter your pin: ");

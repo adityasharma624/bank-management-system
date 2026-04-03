@@ -1,8 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class User {
     String name;
     private int pin;
     Current current;
     Savings savings;
+    List<String> transactions = new ArrayList<>();
+
 
     User(String name, int pin, boolean wantCurrent, boolean wantSavings) {
         this.name = name;
