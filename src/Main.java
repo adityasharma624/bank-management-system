@@ -45,8 +45,8 @@ void main() {
 }
 
 int login(int uid) {
+    int choice = 0;
     if (manager.exists(uid)) {
-        int choice = 0;
         User user = manager.getUser(uid);
         System.out.print("Enter your PIN: ");
         int pin = input.nextInt();
@@ -92,8 +92,7 @@ int login(int uid) {
                     else System.out.println("Failure!");
                     break;
                 case (4):
-                    Accounts infoAccount = getAccount(user);
-                    infoAccount.getInfo();
+                    user.getInfo();
                     break;
                 case (5):
                     System.out.println("Exiting");

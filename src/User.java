@@ -3,7 +3,7 @@ import java.util.List;
 
 class User {
     String name;
-    private int pin;
+    private final int pin;
     Current current;
     Savings savings;
     List<String> transactions = new ArrayList<>();
