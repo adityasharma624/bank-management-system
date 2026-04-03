@@ -5,18 +5,24 @@ class Current extends Accounts{
     }
 
     @Override
-    boolean deposit(double amount) {
-        if (amount <= 0) return false;
+    boolean deposit(User user, double amount) {
+        if (amount <= 0) {
+            user.logTransactions("[Failed] Deposit " + amount + " to Current - Amount in Negative");
+            return false;
+        }
         this.balance += amount;
+        user.logTransactions("[Success] Deposit " + amount + " to Current");
         return true;
     }
 
     @Override
-    boolean withdraw(double amount) {
+    boolean withdraw(User user, double amount) {
         if (this.balance - amount >= this.minimumAccountBalance) {
             this.balance -= amount;
+            user.logTransactions("[Success] Withdrawal of " + amount + " from Current - Insufficient Balance");
             return true;
         }
+        user.logTransactions("[Failure] Withdrawal of " + amount + " from Current");
         return false;
     }
 

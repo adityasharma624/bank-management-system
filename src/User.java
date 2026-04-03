@@ -21,11 +21,11 @@ class User {
     }
 
     boolean internalTransfer(Accounts from, Accounts to, double amount) {
-        if (from.withdraw(amount)) {
-            if (to.deposit(amount)) {
+        if (from.withdraw(this, amount)) {
+            if (to.deposit(this,amount)) {
                 return true;
             }
-            from.deposit(amount);
+            from.deposit(this,amount);
         }
         return false;
     }
@@ -43,5 +43,9 @@ class User {
 
     Accounts getCurrent() {
         return current;
+    }
+
+    void logTransactions(String log) {
+        transactions.add(log);
     }
 }

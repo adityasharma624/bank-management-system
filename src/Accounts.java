@@ -7,7 +7,7 @@ abstract class Accounts {
         this.minimumAccountBalance = minimumAccountBalance;
     }
 
-    abstract boolean deposit(double amount);
-    abstract boolean withdraw(double amount);
+    abstract boolean deposit(User user, double amount);
+    abstract boolean withdraw(User user, double amount);
     abstract void getInfo();
 }

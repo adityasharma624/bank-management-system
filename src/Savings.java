@@ -7,20 +7,24 @@ class Savings extends Accounts{
     }
 
     @Override
-    boolean deposit(double amount) {
+    boolean deposit(User user, double amount) {
         if (amount <= 0) {
+            user.logTransactions("[Failed] Deposit " + amount + " to Savings - Amount in Negative");
             return false;
         }
         this.balance += amount;
+        user.logTransactions("[Success] Deposit " + amount + " to Savings");
         return true;
     }
 
     @Override
-    boolean withdraw(double amount) {
+    boolean withdraw(User user, double amount) {
         if (this.balance - amount >= this.minimumAccountBalance) {
             this.balance -= amount;
+            user.logTransactions("[Success] Withdrawal of " + amount + " from Savings - Insufficient Balance");
             return true;
         }
+        user.logTransactions("[Failure] Withdrawal of " + amount + " from Savings");
         return false;
     }
 
